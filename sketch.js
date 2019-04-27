@@ -1,23 +1,23 @@
-// const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-// let canvas_height;
-// let canvas_width;
-// if (isMobile) {
-//   canvas_height = window.innerHeight;
-//   canvas_width = window.innerWidth;
-// } else {
-//   canvas_height = 500;
-//   canvas_width = 800;
-// }
-
-let cnv_width = window.innerWidth;
-let cnv_height = window.innerHeight;
-
-let device = "mobile";
-if (cnv_width >= 500) {
-  cnv_width = 320;
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+let cnv_height;
+let cnv_width;
+if (isMobile) {
+  cnv_height = window.innerHeight;
+  cnv_width = window.innerWidth;
+} else {
   cnv_height = 480;
-  device = "desktop";
+  cnv_width = 320;
 }
+
+// let cnv_width = window.innerWidth;
+// let cnv_height = window.innerHeight;
+
+// let device = "mobile";
+// if (cnv_width >= 500) {
+//   cnv_width = 320;
+//   cnv_height = 480;
+//   device = "desktop";
+// }
 
 let cnv;
 let bird;
