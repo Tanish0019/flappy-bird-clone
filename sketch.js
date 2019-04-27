@@ -1,5 +1,4 @@
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
 let cnv;
 let bird;
 let pipes = [];
@@ -7,17 +6,20 @@ let score = 0;
 let bestScore = 0;
 let gameRunning = false;
 
-
 function setup() {
 	if (isMobile) {
 		cnv = createCanvas(windowWidth, windowHeight);
 	} else {
 		cnv = createCanvas(320, 480);
 	}
+	cnv.parent('sketch');
+	button = createButton('Start');
+	button.parent('sketch');
+	button.center();
+	button.mouseClicked(gameStart);
 	bird = new Bird(isMobile);
-	cnv.mouseClicked(gameStart);
+	frameRate(60);
 }
-
 
 function draw() {
 	background(0);
@@ -55,8 +57,6 @@ function draw() {
 	} else {	
 		fill(255);
 		bird.show();
-		textAlign(CENTER)
-		text('Click to start playing', width * 0.5, height / 2);
 	}	
 }
 
@@ -76,7 +76,8 @@ function gameStart() {
 	if (!gameRunning) {
 		bird = new Bird(isMobile);
     gameRunning = true;
-    pipes = [];
+		pipes = [];
+		button.hide();
     loop();
 	}
 }
@@ -84,14 +85,16 @@ function gameStart() {
 function gameOver() {
 	bird.gameOver();
 	fill(255)	
-	rectMode(CENTER)
+	rectMode(CENTER);
 	rect(width/2, height/2, 200, 200, 5);
 	rectMode(CORNER);
 	fill(0);
 	textAlign(CENTER);
-	text("Score: " + score, width / 2, (height / 2) - 50);
-	text("Best Score: " + bestScore, width / 2, (height / 2));
-	text("Click to start playing again!", width / 2, (height / 2) + 50);
+	text("Score: " + score, width / 2, (height / 2) - 25);
+	text("Best Score: " + bestScore, width / 2, (height / 2));	
+	button.html('Play Again!');
+	button.position((width / 2)  - 50, height / 2 + 25);
+	button.show();
 	score = 0;
 	gameRunning = false;
 	noLoop();

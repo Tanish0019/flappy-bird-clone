@@ -14,17 +14,27 @@
 			margin: 0;
 			padding: 0;
 		}
-		canvas {
-			/* position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			margin: auto; */
+		#sketch {
+			position: relative;
+			margin: 0 auto;
+			top: 50%;
+  		transform: translateY(-50%);
+			width: fit-content;
+			height: fit-content;
 			touch-action: manipulation;
+		}
+		button {
+			padding: 5px;
+			background-color: green;
+			border: 0;
+			border-radius: 5px;
+			font-size: 1.3rem;
+			cursor: pointer;
+			outline: none;
 		}
 	</style>
 </head>
 <body>
+	<div id="sketch" style="position: relative;"></div>
 </body>
 </html>
