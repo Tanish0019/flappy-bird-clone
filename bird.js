@@ -1,7 +1,7 @@
 class Bird {
-	constructor(isMobile = false) {
+	constructor(isMobile) {
 		if (isMobile) {
-			this.x = 60;
+			this.x = 80;
 			this.upForce = 3.2;
 			this.gravity = 0.35;
 		} else {

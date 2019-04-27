@@ -1,6 +1,7 @@
 class Pipe {
   constructor() {
     this.x = width;
+    this.crossed = false;
     this.velocity = 3;
     this.pipeTopLen = (random() * height * 2) / 5 + height / 5;
     this.gap = 100 + random() * 30;
@@ -26,10 +27,10 @@ class Pipe {
 
   checkCollision = bird => {
     if (
-      bird.x + bird.radius > this.x &&
-      bird.x - bird.radius < this.x + this.pipeWidth &&
-      (bird.y - bird.radius < this.pipeTopLen ||
-      bird.y + bird.radius > this.pipeTopLen + this.gap)
+      bird.x + bird.radius >= this.x &&
+      bird.x - bird.radius <= this.x + this.pipeWidth &&
+      (bird.y - bird.radius <= this.pipeTopLen ||
+      bird.y + bird.radius >= this.pipeTopLen + this.gap)
     ) {
       return true;
     }
@@ -37,7 +38,8 @@ class Pipe {
   }
 
   birdCrossed = bird => {
-    if (bird.x - bird.radius === this.x + this.pipeWidth) {
+    if (!this.crossed && bird.x - bird.radius >= this.x + this.pipeWidth) { 
+      this.crossed = true;
       return true;
     }
     return false;

@@ -1,23 +1,4 @@
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-let cnv_height;
-let cnv_width;
-if (isMobile) {
-  cnv_height = window.outerHeight;
-  cnv_width = window.outerWidth;
-} else {
-  cnv_height = 480;
-  cnv_width = 320;
-}
-
-// let cnv_width = window.innerWidth;
-// let cnv_height = window.innerHeight;
-
-// let device = "mobile";
-// if (cnv_width >= 500) {
-//   cnv_width = 320;
-//   cnv_height = 480;
-//   device = "desktop";
-// }
 
 let cnv;
 let bird;
@@ -26,24 +7,31 @@ let score = 0;
 let bestScore = 0;
 let gameRunning = false;
 
+
 function setup() {
-	cnv = createCanvas(cnv_width, cnv_height);
+	if (isMobile) {
+		cnv = createCanvas(windowWidth, windowHeight);
+	} else {
+		cnv = createCanvas(320, 480);
+	}
 	bird = new Bird(isMobile);
 	cnv.mouseClicked(gameStart);
 }
+
+
 function draw() {
 	background(0);
-	if (gameRunning) {
+
+	if (gameRunning) {	
 		if (frameCount % 80 == 0) {
-      pipes.push(new Pipe());
-    }
+      pipes.push(new Pipe);
+		}
+		
+		bird.update();
 		bird.show();
     for (let i = pipes.length - 1; i > -1; i--) {
 			pipes[i].update();
 			pipes[i].show();
-      if (pipes[i].offScreen()) {
-        pipes.splice(i, 1);
-      }
       if (pipes[i].checkCollision(bird)) {
 				bestScore = max(bestScore, score);
 				pipes[i].gameOver();
@@ -53,28 +41,28 @@ function draw() {
 				score++;
 				console.log(score);
 			}
+			if (pipes[i].offScreen()) {
+        pipes.splice(i, 1);
+      }
     }
 
-    if (!bird.checkCollision()) {
-			bird.update();
-    } else {
+    if (bird.checkCollision()) {
 			bestScore = max(bestScore, score);
-			console.log(bestScore)
+			console.log(bestScore);
       gameOver();
-    }
-	} else {
-		bird.show();
+		}
+
+	} else {	
 		fill(255);
+		bird.show();
 		textAlign(CENTER)
 		text('Click to start playing', width * 0.5, height / 2);
 	}	
 }
 
 function keyPressed() {
-	if (keyCode === 32) {
-		if (gameRunning) {
-      bird.fly();
-		}
+	if (keyCode === 32 && gameRunning) {
+    bird.fly();
 	}
 }
 
