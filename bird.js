@@ -1,11 +1,17 @@
 class Bird {
-	constructor() {
+	constructor(isMobile = false) {
+		if (isMobile) {
+			this.x = 60;
+			this.upForce = 3.2;
+			this.gravity = 0.35;
+		} else {
+			this.x = 50;
+      this.upForce = 4.6;
+      this.gravity = 0.25;
+		}
 		this.y = height / 2;
-		this.x = 50;
 		this.velocity = 0;
-		this.gravity = 0.25;
 		this.radius = 15;
-		this.upForce = 4.6;
 		this.airResistance = 0.6;
 	}
 

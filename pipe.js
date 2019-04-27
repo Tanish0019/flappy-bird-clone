@@ -3,7 +3,7 @@ class Pipe {
     this.x = width;
     this.velocity = 3;
     this.pipeTopLen = (random() * height * 2) / 5 + height / 5;
-    this.gap = 90 + random() * 30;
+    this.gap = 100 + random() * 30;
     this.pipeBotLen = height - this.pipeTopLen - this.gap;
     this.pipeWidth = 30;
   }
@@ -37,7 +37,7 @@ class Pipe {
   }
 
   birdCrossed = bird => {
-    if (bird.x - bird.radius == this.x + this.pipeWidth) {
+    if (bird.x - bird.radius === this.x + this.pipeWidth) {
       return true;
     }
     return false;
